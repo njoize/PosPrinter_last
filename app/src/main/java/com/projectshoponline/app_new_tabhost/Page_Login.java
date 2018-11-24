@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -54,7 +55,7 @@ public class Page_Login extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        // Permission StrictMode
+        // Permission StrictMode ==> Try to Use http://, https://
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
@@ -62,11 +63,14 @@ public class Page_Login extends AppCompatActivity {
         }
 
 
+        // Create File wml Info.xml package Value "" at key s_name
         SharedPreferences sharedPref = getSharedPreferences("Info", Context.MODE_PRIVATE);
 
+        // Read Value from Info.xml at key s_name defaule ""
         String data_name = sharedPref.getString("s_name", "");
 
 
+        // Iniaial View
         CheckBox chk = (CheckBox) findViewById(R.id.chk1);
         chk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +181,10 @@ public class Page_Login extends AppCompatActivity {
 
                 String resultServer = MyHttp.getHttpPost(url, params);
 
+                Log.d("24novV1","resultServer ==> " + resultServer);
+//                Bad  Authen ==> resultServer ==> {"StatusID":"0","MemberID":"0","Username":"0","Error":"Incorrect Username and Password"}
+//                Good Authen ==> resultServer ==> {"StatusID":"1","MemberID":"1","Username":null,"Error":"Complete"}
+
                 /*** Default Value ***/
                 String strStatusID = "0";
                 String strMemberID = "0";
@@ -228,7 +236,7 @@ public class Page_Login extends AppCompatActivity {
             }
         });
 
-    }
+    }   // Main Method
 
 //    private void DialogFogotPassword() {
 //        View dialogBoxView = View.inflate(this, R.layout.dialog_get_password, null);

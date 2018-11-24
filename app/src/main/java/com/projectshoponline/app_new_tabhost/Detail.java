@@ -578,7 +578,13 @@ public class Detail extends AppCompatActivity {
     }
 
 class ClickEvent implements View.OnClickListener {
+
+    String tag = "24novV1";
+
     public void onClick(View v) {
+
+        Log.d(tag, "You Click ==> " + v.toString());
+
         if (v == btnConn) {
             if( connFlag == 0 ){   //������������˰�ť������������߳�
                 connFlag = 1;
@@ -587,7 +593,11 @@ class ClickEvent implements View.OnClickListener {
                 wfComm.initSocket(strAddressIp,9100);
             }
         } else if (v == btnPrint) {
+
+//            Start Print
+
             String msg = edtContext.getText().toString();
+            Log.d(tag, "msg ==> " + msg);
            // String msg = listView_1.toString();
 
             Toast.makeText(Detail.this, "ok", Toast.LENGTH_SHORT).show();
